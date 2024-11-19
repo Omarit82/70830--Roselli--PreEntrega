@@ -29,6 +29,9 @@ productRouter.get('/:id',(req, res)=>{
 //Crea un nuevo producto
 productRouter.post('/', async(req, res)=>{
     const {title, description, code, price, stock, category} = req.body
+    if(!title || !description || !code || !price || !stock || !category){
+        res.status(400).send({mensaje:'Bad request - campos incompletos'})
+    }else{
     const newProd = {
         id: crypto.randomBytes(10).toString('hex'),
         title: title,
@@ -43,6 +46,7 @@ productRouter.post('/', async(req, res)=>{
     products.push(newProd)
     await fs.writeFile(productosPath, JSON.stringify(products))
     res.status(201).send({mensaje: `Producto creado correctamente con el id ${newProd.id}`})
+    }
 })
 //Actualiza un producto dado su id
 productRouter.put('/:id', async(req,res) => {

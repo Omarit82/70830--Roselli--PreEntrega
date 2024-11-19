@@ -40,7 +40,7 @@ cartsRouter.post('/:cid/products/:id', async(req, res)=>{
     if(cart){
         const index = cart.products.findIndex(prod => prod.id ==idP)
         if(index != -1){
-            cart.products[index].quantity = quantity
+            cart.products[index].quantity += quantity
         } else {
             cart.products.push({id: idP, quantity})
         }
