@@ -6,7 +6,9 @@ export const productRouter = Router()
 const products = []
 //Consulta producto
 productRouter.get('/', (req,res)=>{
-    res.status(200).send(products)
+    const {limits} = req.query
+    const prods = products.slice(0,limits)
+    res.status(200).send(prods)
 })
 //Consultar producto con id
 productRouter.get('/:id',(req, res)=>{
