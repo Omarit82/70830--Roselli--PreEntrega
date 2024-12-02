@@ -1,8 +1,8 @@
 <h2 class="text-center"> Products List </h2>
-<div class="row">
+<div class="d-flex justify-content-center">
     {{#each products}}
         {{#if status}}
-            <div class="card m-3" style="width: 18rem;">
+            <div class="card borderCard m-3" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{title}}</h5>
                     <p class="card-text">Description: {{description}}</p>
