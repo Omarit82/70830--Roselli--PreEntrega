@@ -16,6 +16,7 @@ cartsRouter.get('/:id', (req, res) =>{
 
     if(cart){
         res.status(200).send(cart.products)
+        res.status(200).render('templates/cart',{cart: cart.products, js:'productos.js'})
     } else {
         res.status(404).send({mensaje: "Carro no encontrado."})
     }
