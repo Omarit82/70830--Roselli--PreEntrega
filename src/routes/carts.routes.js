@@ -28,7 +28,7 @@ cartsRouter.post('/', async(req, res)=>{
     }
     carritos.push(newCart)
     await fs.writeFile(carritosPath, JSON.stringify(carritos))
-    res.status(201).send(`Carrito creado correctamente con id: ${newCart.id}`)
+    res.status(201).send({message: `Carrito creado correctamente con id: ${newCart.id}`})
 })
 
 cartsRouter.post('/:cid/products/:id', async(req, res)=>{

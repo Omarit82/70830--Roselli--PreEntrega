@@ -10,18 +10,19 @@ const productosPath = path.resolve(__dirname,'../src/db/productos.json');
 const productosData = await fs.readFile(productosPath, 'utf-8');
 const products = JSON.parse(productosData);
 
-//Consulta producto
+//Consulta productos
 productRouter.get('/', (req,res)=>{
     const {limit} = req.query
     const prods = products.slice(0,limit)
-    res.status(200).render('templates/home',{products: products, js:'productos.js',css:'products.css'})
+    res.status(200).send({products: products})
 })
 //Consultar producto con id
 productRouter.get('/:id',(req, res)=>{
     const id = req.params.id
     const product = products.find(prod => prod.id == id);
     if(product){
-        res.status(200).send(product)
+        //res.status(200).send(product)
+        res.status(200).send({product: product})
     } else {
         res.status(404).send({mensaje: "El producto no existe"})
     }

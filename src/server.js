@@ -6,7 +6,9 @@ import {__dirname} from './path.js'
 import { productRouter } from './routes/products.routes.js';
 import { cartsRouter } from './routes/carts.routes.js';
 import multerRouter from './routes/imgs.routes.js';
-import chatRouter from './routes/chat.routes.js';
+import { viewsRouter } from './routes/views.routes.js';
+import {promises as fs} from 'fs';
+import crypto from 'crypto'
 
 const app = express();
 const hbs = create();
@@ -28,18 +30,18 @@ app.set('views',path.join(__dirname,'/views'))
 app.use('/public', express.static(__dirname+'/public'))
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartsRouter)
+app.use('/chat',viewsRouter)
+app.use('/home',viewsRouter)
 app.use('/upload', multerRouter)
-app.use('/api/chat',chatRouter)
+app.use('/realTimeProducts',viewsRouter)
 
 
 app.get('/', (req,res) => {
     res.status(200).send('Ok');
 })
 
-
-
 // WEBSOCKET
-let messages = []
+
 io.on('connection',(socket) => {
     console.log('User connected: ',socket.id);
 
@@ -47,6 +49,26 @@ io.on('connection',(socket) => {
         console.log("Message received: ",data);
         messages.push(data);
         socket.emit('respuesta',messages)
+    })
+
+    socket.on('eraseProduct',async(producto)=>{
+        const productosPath = path.resolve(__dirname,'../src/db/productos.json');
+        const productosData = await fs.readFile(productosPath, 'utf-8');
+        const products = JSON.parse(productosData);
+        const result = products.filter( prod => prod.id !== producto.id);
+        console.log(result);
+    })
+
+    socket.on('addProduct',async(newProd) => {
+        const productosPath = path.resolve(__dirname,'../src/db/productos.json');
+        const productosData = await fs.readFile(productosPath, 'utf-8');
+        const products = JSON.parse(productosData);
+        newProd["id"] = crypto.randomBytes(10).toString('hex');
+        newProd["thumbnails"] = [];
+        products.push(newProd);
+        await fs.writeFile(productosPath, JSON.stringify(products))
+        socket.emit('respuesta',products)
+
     })
 
     socket.on('disconnect', () => {

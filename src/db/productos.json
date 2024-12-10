@@ -1,1 +1,45 @@
-[{"id":"ba5025e7ec9eca5b0053","title":"Girotondo","description":"Giusy Ferreri","code":"cdPop001","price":35,"status":true,"stock":9,"category":"pop"},{"id":"76dac950f4146d02d6da","title":"L'attesa","description":"Giusy Ferreri","code":"cdPop002","price":50,"status":true,"stock":5,"category":"pop","thumbnails":[]},{"id":"d58ef5c5f1d15f2e0d67","title":"Kiss","description":"Hot in the shade","code":"vinRock001","price":120,"status":true,"stock":5,"category":"Rock","thumbnails":[]}]
+[
+    {
+        "id": "ba5025e7ec9eca5b0053",
+        "title": "Girotondo",
+        "description": "Giusy Ferreri",
+        "code": "cdPop001",
+        "price": 35,
+        "status": true,
+        "stock": 9,
+        "category": "pop"
+    },
+    {
+        "id": "76dac950f4146d02d6da",
+        "title": "L'attesa",
+        "description": "Giusy Ferreri",
+        "code": "cdPop002",
+        "price": 50,
+        "status": true,
+        "stock": 5,
+        "category": "pop",
+        "thumbnails": []
+    },
+    {
+        "title": "Hot in the Shade",
+        "description": "Kiss",
+        "code": "001Rock",
+        "category": "Rock",
+        "price": 150,
+        "stock": 2,
+        "status": true,
+        "id": "ccbc07fb7f002264ffa2",
+        "thumbnails": []
+    },
+    {
+        "title": "Oktubre",
+        "description": "PR",
+        "code": "001Rock",
+        "category": "Rock",
+        "price": 195,
+        "stock": 5,
+        "status": true,
+        "id": "ffcdfef9dff2ace9cd3a",
+        "thumbnails": []
+    }
+]
