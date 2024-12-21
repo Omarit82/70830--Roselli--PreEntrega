@@ -2,6 +2,7 @@ const socket = io()
 
 const btnErase  = document.querySelectorAll('.btnErase');
 const contenedor = document.getElementById('contenedor');
+const form = document.getElementById('add');
 
 btnErase.forEach(button => {
     button.addEventListener('click',(e)=>{
@@ -10,7 +11,7 @@ btnErase.forEach(button => {
     })
 });
 
-const form = document.getElementById('add');
+
 
 form.addEventListener('submit',(e)=>{
     e.preventDefault();

@@ -30,16 +30,5 @@
         "status": true,
         "id": "ccbc07fb7f002264ffa2",
         "thumbnails": []
-    },
-    {
-        "title": "Oktubre",
-        "description": "PR",
-        "code": "001Rock",
-        "category": "Rock",
-        "price": 195,
-        "stock": 5,
-        "status": true,
-        "id": "ffcdfef9dff2ace9cd3a",
-        "thumbnails": []
     }
 ]

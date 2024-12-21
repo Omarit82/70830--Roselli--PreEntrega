@@ -9,6 +9,7 @@ import multerRouter from './routes/imgs.routes.js';
 import { viewsRouter } from './routes/views.routes.js';
 import {promises as fs} from 'fs';
 import crypto from 'crypto'
+import mongoose from 'mongoose';
 
 const app = express();
 const hbs = create();
@@ -18,7 +19,12 @@ const server = app.listen(PORT,() => {
     console.log("Server on port ",PORT )
 })
 
+await mongoose.connect("mongodb+srv://Omarit:Strutter78@cluster0.nbefu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0").then(()=>{console.log("Conexion exitosa a la ddbb")}).catch(()=>{console.log("Fallo al conectar a la ddbb")})
+
+
 const io = new Server(server)
+
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
@@ -51,12 +57,14 @@ io.on('connection',(socket) => {
         socket.emit('respuesta',messages)
     })
 
-    socket.on('eraseProduct',async(producto)=>{
+    socket.on('eraseProduct',async(id)=>{
         const productosPath = path.resolve(__dirname,'../src/db/productos.json');
         const productosData = await fs.readFile(productosPath, 'utf-8');
         const products = JSON.parse(productosData);
-        const result = products.filter( prod => prod.id !== producto.id);
+        const result = products.filter( prod => prod.id !== id.id);
         console.log(result);
+        await fs.writeFile(productosPath, JSON.stringify(result))
+        socket.emit('respuesta',result)
     })
 
     socket.on('addProduct',async(newProd) => {

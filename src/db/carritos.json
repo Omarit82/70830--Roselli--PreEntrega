@@ -1,2 +1,24 @@
-[{"id":"cf8c906721","products":[{"id":"555222555aaa","quantity":6},{"id":"55522255bbb","quantity":3}]},
-{"id":"49c9c5c8da","products":[{"id":"76dac950f4146d02d6da","quantity":5}]}]
+[
+    {
+        "id": "cf8c906721",
+        "products": [
+            {
+                "id": "555222555aaa",
+                "quantity": 6
+            },
+            {
+                "id": "55522255bbb",
+                "quantity": 3
+            }
+        ]
+    },
+    {
+        "id": "49c9c5c8da",
+        "products": [
+            {
+                "id": "76dac950f4146d02d6da",
+                "quantity": 5
+            }
+        ]
+    }
+]
