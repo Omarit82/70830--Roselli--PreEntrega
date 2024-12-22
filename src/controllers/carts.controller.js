@@ -3,7 +3,7 @@ import { cartModel  } from "../models/cart.model.js";
 export const getCart = async(req,res) => {
     try {
         const id = req.params.id;
-        const respuesta = await cartModel.findById(id).populate('products.');
+        const respuesta = await cartModel.findById(id).populate('products.id_prod');
         if(respuesta){
             res.status(200).send(respuesta)
         }else{
@@ -30,11 +30,11 @@ export const insertProductCart = async(req, res) => {
         const prodId = req.params.pid;
         const {quantity} = req.body;
         const cart = await cartModel.findById(cartId)
-        const indice = cart.products.findIndex(prod => prod.id == prodId)
+        const indice = cart.products.findIndex(prod => prod.id_prod == prodId)
         if(indice != -1){
             cart.products[indice].quantity += quantity
         } else {
-            cart.products.push({productId: prodId, quantity:quantity})
+            cart.products.push({id_prod: prodId, quantity:quantity})
         }
         const respuesta = await cartModel.findByIdAndUpdate(cartId, cart);
         res.status(200).send({message:"Producto agregado correctamente",respuesta:respuesta})
