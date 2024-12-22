@@ -3,8 +3,14 @@ import { productsModel } from "../models/products.model.js";
 
 export const getProducts = async (req,res) => {
     try {
-        const limit = req.query.limit
-        const prods = await productsModel.paginate({},{limit:3,page:1});
+        const {limit, page, filter,metFilter, order} = req.query
+
+        const pag = page !== undefined ? page:1
+        const lim = limit !== undefined ? limit:5
+        const query = metFilter !== undefined ? {[metFilter]:filter}:{}
+        const orderQuery = order !== undefined ? {price:order} : {}
+
+        const prods = await productsModel.paginate(query,{limit:lim,page:pag , orderQuery});
         res.status(200).send({products:prods});
     } catch (error) {
         res.status(500).send("Error al obtener productos")
