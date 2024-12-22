@@ -1,9 +1,10 @@
 import { productsModel } from "../models/products.model.js";
 
+
 export const getProducts = async (req,res) => {
     try {
         const limit = req.query.limit
-        const prods = await productsModel.find().limit(limit);
+        const prods = await productsModel.paginate({},{limit:3,page:1});
         res.status(200).send({products:prods});
     } catch (error) {
         res.status(500).send("Error al obtener productos")

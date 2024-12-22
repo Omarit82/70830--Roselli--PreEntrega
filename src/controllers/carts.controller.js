@@ -42,3 +42,13 @@ export const insertProductCart = async(req, res) => {
         res.status(404).send(error)
     }
 }
+
+export const viewCart = async (req,res) => {
+    try {
+        const cid = req.params.cid;
+        const cart = await cartModel.findById(cid).lean();
+        res.status(200).render('templates/cart',{cart:cart,css:'products.css'},)
+    } catch (error) {
+        res.status(500).render('templates/error')
+    }
+}

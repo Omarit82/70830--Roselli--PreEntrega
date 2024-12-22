@@ -7,7 +7,6 @@ import { productRouter } from './routes/products.routes.js';
 import { cartsRouter } from './routes/carts.routes.js';
 import multerRouter from './routes/imgs.routes.js';
 import { viewsRouter } from './routes/views.routes.js';
-import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access';
 
 import mongoose from 'mongoose';
 
@@ -38,7 +37,8 @@ app.use('/public', express.static(__dirname+'/public'))
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/chat',viewsRouter)
-app.use('/home',viewsRouter)
+app.use('/',viewsRouter)
+app.use('/carts',viewsRouter)
 app.use('/upload', multerRouter)
 
 app.get('/', (req,res) => {
