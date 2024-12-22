@@ -40,15 +40,12 @@ app.use('/api/carts', cartsRouter)
 app.use('/chat',viewsRouter)
 app.use('/home',viewsRouter)
 app.use('/upload', multerRouter)
-app.use('/realTimeProducts',viewsRouter)
-
 
 app.get('/', (req,res) => {
     res.status(200).send('Ok');
 })
 
 // WEBSOCKET
-/*
 io.on('connection',(socket) => {
     console.log('User connected: ',socket.id);
 
@@ -57,23 +54,9 @@ io.on('connection',(socket) => {
         messages.push(data);
         socket.emit('respuesta',messages)
     })
-
-    socket.on('eraseProduct',async(id)=>{
-        const result = products.filter( prod => prod.id !== id.id);
-        
-        socket.emit('respuesta',result)
-    })
-
-    socket.on('addProduct',async(newProd) => {
-       
-        products.push(newProd);
-       
-        socket.emit('respuesta',products)
-
-    })
-
+    
     socket.on('disconnect', () => {
         console.log('User disconnected: ',socket.id)
     })
     
-})*/
+})

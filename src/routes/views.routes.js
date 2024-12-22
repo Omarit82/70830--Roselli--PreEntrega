@@ -5,4 +5,4 @@ export const viewsRouter = Router()
 
 viewsRouter.get('/',viewProducts)
 viewsRouter.get('/:id',viewProduct)
-/*viewsRouter.get('/', realTimeProducts)*/
+
