@@ -10,13 +10,22 @@ export const getProducts = async (req,res) => {
         res.status(500).send("Error al obtener productos")
     }
 }
+export const viewProducts = async (req,res) => {
+    try {
+        const limit = req.query.limit
+        const prods = await productsModel.find().limit(limit);
+        res.status(200).render('templates/home',{products: prods,css:'products.css'})
+    } catch (error) {
+        res.status(500).render('templates/error')
+    }
+}
 
 export const getProduct = async (req,res) => {
     try {
         const prodId = req.params.id;
         const prod = await productsModel.findById(prodId);
         if(prod){
-            return res.status(200).render('templates/home',{product: product, css:'products.css'})
+            return res.status(200).send({product: product, css:'products.css'})
         }else{
             return res.status(404).send("El producto no existe")
         }
@@ -25,6 +34,21 @@ export const getProduct = async (req,res) => {
         res.status(500).send("Error al obtener producto")
     }
 }
+export const viewProduct = async (req,res) => {
+    try {
+        const prodId = req.params.id;
+        const prod = await productsModel.findById(prodId);
+        if(prod){
+            return res.status(200).render('templates/home',{product: product, css:'products.css'})
+        }else{
+            return res.status(404).render('templates/error')
+        }
+
+    } catch (error) {
+        res.status(500).send("Error al obtener producto")
+    }
+}
+
 export const createProduct = async (req,res) => {
     try {
         const product = req.body

@@ -7,9 +7,10 @@ import { productRouter } from './routes/products.routes.js';
 import { cartsRouter } from './routes/carts.routes.js';
 import multerRouter from './routes/imgs.routes.js';
 import { viewsRouter } from './routes/views.routes.js';
-import {promises as fs} from 'fs';
-import crypto from 'crypto'
+import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access';
+
 import mongoose from 'mongoose';
+
 
 const app = express();
 const hbs = create();
@@ -47,7 +48,7 @@ app.get('/', (req,res) => {
 })
 
 // WEBSOCKET
-
+/*
 io.on('connection',(socket) => {
     console.log('User connected: ',socket.id);
 
@@ -58,23 +59,15 @@ io.on('connection',(socket) => {
     })
 
     socket.on('eraseProduct',async(id)=>{
-        const productosPath = path.resolve(__dirname,'../src/db/productos.json');
-        const productosData = await fs.readFile(productosPath, 'utf-8');
-        const products = JSON.parse(productosData);
         const result = products.filter( prod => prod.id !== id.id);
-        console.log(result);
-        await fs.writeFile(productosPath, JSON.stringify(result))
+        
         socket.emit('respuesta',result)
     })
 
     socket.on('addProduct',async(newProd) => {
-        const productosPath = path.resolve(__dirname,'../src/db/productos.json');
-        const productosData = await fs.readFile(productosPath, 'utf-8');
-        const products = JSON.parse(productosData);
-        newProd["id"] = crypto.randomBytes(10).toString('hex');
-        newProd["thumbnails"] = [];
+       
         products.push(newProd);
-        await fs.writeFile(productosPath, JSON.stringify(products))
+       
         socket.emit('respuesta',products)
 
     })
@@ -82,5 +75,5 @@ io.on('connection',(socket) => {
     socket.on('disconnect', () => {
         console.log('User disconnected: ',socket.id)
     })
-
-})
+    
+})*/
