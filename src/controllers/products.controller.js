@@ -4,8 +4,7 @@ export const getProducts = async (req,res) => {
     try {
         const limit = req.query.limit
         const prods = await productsModel.find().limit(limit);
-        // res.status(200).render('templates/home',{products: prods,css:'products.css'})
-        res.status(200).send(prods);
+        res.status(200).send({products:prods});
     } catch (error) {
         res.status(500).send("Error al obtener productos")
     }
@@ -13,7 +12,7 @@ export const getProducts = async (req,res) => {
 export const viewProducts = async (req,res) => {
     try {
         const limit = req.query.limit
-        const prods = await productsModel.find().limit(limit);
+        const prods = await productsModel.find().limit(limit).lean();
         res.status(200).render('templates/home',{products: prods,css:'products.css'})
     } catch (error) {
         res.status(500).render('templates/error')
@@ -37,11 +36,11 @@ export const getProduct = async (req,res) => {
 export const viewProduct = async (req,res) => {
     try {
         const prodId = req.params.id;
-        const prod = await productsModel.findById(prodId);
+        const prod = await productsModel.findById(prodId).lean();
         if(prod){
-            return res.status(200).render('templates/home',{product: product, css:'products.css'})
+            res.status(200).render('templates/singleProduct',{product: prod, css:'products.css'})
         }else{
-            return res.status(404).render('templates/error')
+            res.status(404).render('templates/error')
         }
 
     } catch (error) {
