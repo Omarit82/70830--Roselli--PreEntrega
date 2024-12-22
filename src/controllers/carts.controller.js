@@ -3,7 +3,7 @@ import { cartModel  } from "../models/cart.model.js";
 export const getCart = async(req,res) => {
     try {
         const id = req.params.id;
-        const respuesta = await cartModel.findById(id).populate('products.id_prod');
+        const respuesta = await cartModel.findOne({_id:id})
         if(respuesta){
             res.status(200).send(respuesta)
         }else{
@@ -18,7 +18,7 @@ export const getCart = async(req,res) => {
 export const createCart = async(req,res) => {
     try {
         const respuesta = await cartModel.create({products:[]});
-        res.status(201).send({message:"Carro creado correctamente",cart: respuesta})
+        res.status(201).send({message:"Carro creado correctamente"})
     } catch (error) {
         res.status(404).send(error)
     }
@@ -37,7 +37,7 @@ export const insertProductCart = async(req, res) => {
             cart.products.push({id_prod: prodId, quantity:quantity})
         }
         const respuesta = await cartModel.findByIdAndUpdate(cartId, cart);
-        res.status(200).send({message:"Producto agregado correctamente",respuesta:respuesta})
+        res.status(200).send({message:"Producto agregado correctamente"})
     } catch (error) {
         res.status(404).send(error)
     }
