@@ -7,6 +7,7 @@ import { productRouter } from './routes/products.routes.js';
 import { cartsRouter } from './routes/carts.routes.js';
 import multerRouter from './routes/imgs.routes.js';
 import { viewsRouter } from './routes/views.routes.js';
+import { userRouter } from './routes/users.routes.js';
 
 import mongoose from 'mongoose';
 
@@ -36,9 +37,8 @@ app.set('views',path.join(__dirname,'/views'))
 app.use('/public', express.static(__dirname+'/public'))
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartsRouter)
-app.use('/chat',viewsRouter)
+app.use('/api', userRouter)
 app.use('/',viewsRouter)
-app.use('/carts',viewsRouter)
 app.use('/upload', multerRouter)
 
 app.get('/', (req,res) => {

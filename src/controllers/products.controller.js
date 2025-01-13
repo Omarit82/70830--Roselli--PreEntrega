@@ -16,15 +16,7 @@ export const getProducts = async (req,res) => {
         res.status(500).send("Error al obtener productos")
     }
 }
-export const viewProducts = async (req,res) => {
-    try {
-        const limit = req.query.limit
-        const prods = await productsModel.find().limit(limit).lean();
-        res.status(200).render('templates/home',{products: prods,css:'products.css'})
-    } catch (error) {
-        res.status(500).render('templates/error')
-    }
-}
+
 
 export const getProduct = async (req,res) => {
     try {
@@ -34,20 +26,6 @@ export const getProduct = async (req,res) => {
             return res.status(200).send({product: prod})
         }else{
             return res.status(404).send({message:"El producto no existe"})
-        }
-
-    } catch (error) {
-        res.status(500).send("Error al obtener producto")
-    }
-}
-export const viewProduct = async (req,res) => {
-    try {
-        const prodId = req.params.id;
-        const prod = await productsModel.findById(prodId).lean();
-        if(prod){
-            res.status(200).render('templates/singleProduct',{product: prod, css:'products.css'})
-        }else{
-            res.status(404).render('templates/error')
         }
 
     } catch (error) {

@@ -11,8 +11,6 @@ btnErase.forEach(button => {
     })
 });
 
-
-
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
     const info = new FormData(form);

@@ -9,6 +9,17 @@ export const getUsers = async(req,res) => {
     }
 }
 
+export const loginUser = async(req,res) => {
+    try {
+        const {email, pass} = req.body
+        console.log(email);
+        console.log(pass)
+    } catch (e) {
+        res.status(500).send({message:"Error de conexion",error:e})
+    }
+    
+}
+
 export const getUser = async(req,res) => {
     try {
         const id = req.params.id;
@@ -23,4 +34,22 @@ export const getUser = async(req,res) => {
     }
 }
 
-export const createUser = async
+export const createUser = async (req,res) => {
+    try {
+        const usuario = req.body;
+        const respuesta = await userModel.create(usuario);
+        res.status(201).send({message:"Usuario Creado", usuario: respuesta})
+    } catch (e) {
+        res.status(500).send({message:"Error en la conexion",error:e})
+    }
+}
+
+export const deleteUser = async(req,res) => {
+    try {
+        const id = req.params.id;
+        const respuesta = await userModel.findOneAndDelete(id);
+        res.status(200).send({message:"Usuario eliminado", respuesta: respuesta})
+    } catch (e) {
+        res.status(500).send({message:"Error en la conexion", error:e})
+    }
+}
