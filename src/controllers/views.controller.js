@@ -39,6 +39,14 @@ export const viewProducts = async (req,res) => {
     }
 }
 
+export const viewLoadProduct = async (req,res) => {
+    try {
+        res.status(200).render('templates/load',{js:'loadProduct.js',css:'products.css'})
+    } catch (e) {
+        res.status(500).render('templates/error')
+    }
+}
+
 export const viewProduct = async (req,res) => {
     try {
         const prodId = req.params.id;

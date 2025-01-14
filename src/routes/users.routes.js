@@ -5,7 +5,7 @@ import { getUser, loginUser,getUsers, createUser, deleteUser } from '../controll
 export const userRouter = Router();
 
 userRouter.get('/login',loginUser);
-userRouter.get('/users',getUsers); // Devuelve todos los usuarios
-userRouter.get('/users/:id',getUser); //Devuelve un usuario segun su id
-userRouter.post('/users',createUser); // Crea un usuario
-userRouter.delete('/users/:id',deleteUser); //Borra un usuario segun su id
+userRouter.get('/',getUsers); // Devuelve todos los usuarios
+userRouter.get('/:id',getUser); //Devuelve un usuario segun su id
+userRouter.post('/',createUser); // Crea un usuario
+userRouter.delete('/:id',deleteUser); //Borra un usuario segun su id
